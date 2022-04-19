@@ -23,6 +23,13 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="3">
+     <widget class="QPushButton" name="Display">
+      <property name="text">
+       <string>Display</string>
+      </property>
+     </widget>
+    </item>
     <item row="0" column="2">
      <widget class="QComboBox" name="box">
       <item>
@@ -49,15 +56,14 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="Display">
-      <property name="text">
-       <string>Display</string>
-      </property>
-     </widget>
-    </item>
     <item row="1" column="2">
-     <widget class="QTableWidget" name="table"/>
+     <widget class="QTableWidget" name="tableWidget">
+      <column>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
+      </column>
+     </widget>
     </item>
    </layout>
   </widget>

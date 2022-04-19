@@ -54,6 +54,7 @@ class Area(QMainWindow):
         loadUi('Area.ui', self)
         self.Back.clicked.connect(self.GoBack)
 
+
     def GoBack(self):
         widget.setCurrentIndex(0)
 
@@ -92,7 +93,8 @@ class County(QMainWindow):
         loadUi('County.ui', self)
         self.Back.clicked.connect(self.GoBack)
         self.Display.clicked.connect(self.DisplayTable)
-        self.table = QTableWidget()
+        self.tableWidget.setColumnWidth(0, 150)
+
     def GoBack(self):
         widget.setCurrentIndex(0)
     def DisplayTable(self):
@@ -102,20 +104,35 @@ class County(QMainWindow):
             cur.execute("SELECT * FROM County")
             tablerow = 0
             rows = cur.fetchall()
-            self.table.setRowCount(3145)
-            self.table.setColumnCount(2)
+            self.tableWidget.setRowCount(len(rows))
+            #self.table.setColumnCount(1)
             for row in rows:
-                self.table.setItem(tablerow, 0, QTableWidgetItem(row))
-                tablerow += 1
+
+                self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                tablerow = tablerow + 1
+
 
 
         elif(self.box.currentText() == "First 10 Rows"):
             cur.execute("SELECT * FROM County LIMIT 10")
-            print("test1")
+            tablerow = 0
+            rows = cur.fetchall()
+            self.tableWidget.setRowCount(len(rows))
+            # self.table.setColumnCount(1)
+            for row in rows:
+                self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                tablerow = tablerow + 1
         else:
             cur.execute("SELECT * FROM County LIMIT 100")
-            print("test2")
-
+            tablerow = 0
+            rows = cur.fetchall()
+            self.tableWidget.setRowCount(len(rows))
+            # self.table.setColumnCount(1)
+            for row in rows:
+                self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                tablerow = tablerow + 1
+        cur.close()
+        conn.close()
 app = QtWidgets.QApplication(sys.argv)
 app.setStyle("fusion")
 widget = QtWidgets.QStackedWidget()
@@ -132,7 +149,7 @@ widget.addWidget(County())
 
 
 
-widget.setWindowTitle("CSE 412 Covid-19 Database")
+widget.setWindowTitle("COVID-19 DATA HELPER")
 
 widget.show()
 
