@@ -9,11 +9,42 @@ from pandas import DataFrame
 from urllib.request import urlopen
 import plotly.express as px
 
+conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+
+cur = conn.cursor()
+cur.execute("SELECT * FROM Area LIMIT 10")
+rows = cur.fetchall()
+
+for row in rows:
+    print(row)
+    print("\n")
+conn.commit()
+cur.close()
+conn.close()
+
+
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi('main.ui', self)
+        self.Area.clicked.connect(self.gotoArea)
+        self.State.clicked.connect(self.gotoState)
+        self.County.clicked.connect(self.gotoCounty)
+        self.Population.clicked.connect(self.gotoPopulation)
+        self.Covid_Cases.clicked.connect(self.gotoCovid)
 
+    def gotoArea(self):
+        widget.setCurrentIndex(1)
+    def gotoState(self):
+        widget.setCurrentIndex(2)
+    def gotoCounty(self):
+        widget.setCurrentIndex(3)
+    def gotoPopulation(self):
+        widget.setCurrentIndex(4)
+    def gotoCovid(self):
+        widget.setCurrentIndex(5)
 
 class Area(QMainWindow):
     def __init__(self):
@@ -47,11 +78,11 @@ widget = QtWidgets.QStackedWidget()
 
 
 widget.addWidget(MainWindow())
-#widget.addWidget(Area())
-#widget.addWidget(County())
-#widget.addWidget(Covid_Cases())
-#widget.addWidget(Population())
-#widget.addWidget(State())
+widget.addWidget(Area())
+widget.addWidget(County())
+widget.addWidget(Covid_Cases())
+widget.addWidget(Population())
+widget.addWidget(State())
 
 
 
