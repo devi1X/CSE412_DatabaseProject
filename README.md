@@ -4,3 +4,4 @@
 
 
 Clone all files and run GUI.py
+(test)
