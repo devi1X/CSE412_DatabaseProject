@@ -6,21 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>602</width>
-    <height>311</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+    <horstretch>100</horstretch>
+    <verstretch>100</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>10</y>
-      <width>371</width>
-      <height>31</height>
+      <x>90</x>
+      <y>50</y>
+      <width>411</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="html">
@@ -34,10 +46,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>60</y>
-      <width>56</width>
-      <height>17</height>
+      <x>30</x>
+      <y>130</y>
+      <width>91</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -47,10 +59,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>60</y>
-      <width>61</width>
-      <height>17</height>
+      <x>150</x>
+      <y>130</y>
+      <width>81</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -60,10 +72,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>60</y>
-      <width>56</width>
-      <height>17</height>
+      <x>260</x>
+      <y>130</y>
+      <width>81</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -73,10 +85,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButton_4">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>60</y>
-      <width>56</width>
-      <height>17</height>
+      <x>370</x>
+      <y>140</y>
+      <width>81</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -86,10 +98,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="pushButton_5">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>60</y>
-      <width>71</width>
-      <height>17</height>
+      <x>480</x>
+      <y>140</y>
+      <width>81</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -99,8 +111,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextBrowser" name="textBrowser_2">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>100</y>
+      <x>70</x>
+      <y>310</y>
       <width>361</width>
       <height>192</height>
      </rect>
