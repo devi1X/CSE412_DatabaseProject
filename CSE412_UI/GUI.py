@@ -4,23 +4,23 @@ from PyQt5.uic import loadUi
 from PyQt5.QtGui import *
 import psycopg2
 from PyQt5 import QtWidgets, QtWebEngineWidgets, QtCore
-from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QMainWindow
+from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QMainWindow,QTableWidget,QTableWidgetItem
 from pandas import DataFrame
 from urllib.request import urlopen
 import plotly.express as px
 
-conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+#conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
 
-cur = conn.cursor()
-cur.execute("SELECT * FROM Area LIMIT 10")
-rows = cur.fetchall()
+#cur = conn.cursor()
+#cur.execute("SELECT * FROM Area LIMIT 10")
+#rows = cur.fetchall()
 
-for row in rows:
-    print(row)
-    print("\n")
-conn.commit()
-cur.close()
-conn.close()
+#for row in rows:
+    #print(row)
+    #print("\n")
+#conn.commit()
+#cur.close()
+#conn.close()
 
 
 
@@ -29,66 +29,111 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi('main.ui', self)
-        self.Area.clicked.connect(self.gotoArea)
-        self.State.clicked.connect(self.gotoState)
-        self.County.clicked.connect(self.gotoCounty)
-        self.Population.clicked.connect(self.gotoPopulation)
-        self.Covid_Cases.clicked.connect(self.gotoCovid)
+        self.Area.clicked.connect(self.AreaPage)
+        self.State.clicked.connect(self.StatePage)
+        self.County.clicked.connect(self.CountyPage)
+        self.Population.clicked.connect(self.PolulationPage)
+        self.Covid_Cases.clicked.connect(self.CasePage)
 
-    def gotoArea(self):
+    def AreaPage(self):
         widget.setCurrentIndex(1)
-    def gotoState(self):
+    def StatePage(self):
         widget.setCurrentIndex(2)
-    def gotoCounty(self):
+    def CasePage(self):
         widget.setCurrentIndex(3)
-    def gotoPopulation(self):
+    def PolulationPage(self):
         widget.setCurrentIndex(4)
-    def gotoCovid(self):
+    def CountyPage(self):
         widget.setCurrentIndex(5)
+
+
 
 class Area(QMainWindow):
     def __init__(self):
         super(Area, self).__init__()
         loadUi('Area.ui', self)
+        self.Back.clicked.connect(self.GoBack)
+
+    def GoBack(self):
+        widget.setCurrentIndex(0)
+
+class State(QMainWindow):
+    def __init__(self):
+        super(State, self).__init__()
+        loadUi('State.ui', self)
+        self.Back.clicked.connect(self.GoBack)
+
+    def GoBack(self):
+        widget.setCurrentIndex(0)
+
+class Covid_Cases(QMainWindow):
+    def __init__(self):
+        super(Covid_Cases, self).__init__()
+        loadUi('Covid_Cases.ui', self)
+        self.Back.clicked.connect(self.GoBack)
+
+    def GoBack(self):
+        widget.setCurrentIndex(0)
+
+
+class Population(QMainWindow):
+    def __init__(self):
+        super(Population, self).__init__()
+        loadUi('Population.ui', self)
+        self.Back.clicked.connect(self.GoBack)
+
+    def GoBack(self):
+        widget.setCurrentIndex(0)
 
 
 class County(QMainWindow):
     def __init__(self):
         super(County, self).__init__()
         loadUi('County.ui', self)
+        self.Back.clicked.connect(self.GoBack)
+        self.Display.clicked.connect(self.DisplayTable)
+        self.table = QTableWidget()
+    def GoBack(self):
+        widget.setCurrentIndex(0)
+    def DisplayTable(self):
+        conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+        cur = conn.cursor()
+        if(self.box.currentText() == "ALL"):
+            cur.execute("SELECT * FROM County")
+            tablerow = 0
+            rows = cur.fetchall()
+            self.table.setRowCount(3145)
+            self.table.setColumnCount(2)
+            for row in rows:
+                self.table.setItem(tablerow, 0, QTableWidgetItem(row))
+                tablerow += 1
 
-class Covid_Cases(QMainWindow):
-    def __init__(self):
-        super(Covid_Cases, self).__init__()
-        loadUi('Covid_Cases.ui', self)
 
-class Population(QMainWindow):
-    def __init__(self):
-        super(Population, self).__init__()
-        loadUi('Population.ui', self)
+        elif(self.box.currentText() == "First 10 Rows"):
+            cur.execute("SELECT * FROM County LIMIT 10")
+            print("test1")
+        else:
+            cur.execute("SELECT * FROM County LIMIT 100")
+            print("test2")
 
-class State(QMainWindow):
-    def __init__(self):
-        super(State, self).__init__()
-        loadUi('State.ui', self)
-
-
-app = QApplication(sys.argv)
+app = QtWidgets.QApplication(sys.argv)
+app.setStyle("fusion")
 widget = QtWidgets.QStackedWidget()
 
 
 widget.addWidget(MainWindow())
 widget.addWidget(Area())
-widget.addWidget(County())
+widget.addWidget(State())
 widget.addWidget(Covid_Cases())
 widget.addWidget(Population())
-widget.addWidget(State())
+widget.addWidget(County())
+
+
 
 
 
 widget.setWindowTitle("CSE 412 Covid-19 Database")
-widget.setFixedHeight(1200)
-widget.setFixedWidth(1200)
+
 widget.show()
 
 try:

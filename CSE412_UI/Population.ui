@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>Population</class>
+ <widget class="QWidget" name="Population">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,192 +13,154 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>20</y>
-     <width>56</width>
-     <height>17</height>
+     <width>336</width>
+     <height>240</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Back</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>20</y>
-     <width>91</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>FIPS</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Total</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Male</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Female</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>18+</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>65+</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>One_Race</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Two or more race</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>20</y>
-     <width>56</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="mouseTracking">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Display</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_2">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>20</y>
-     <width>91</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>ALL</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>First 10 Rows</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>First 100 Rows</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QComboBox" name="comboBox_3">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>50</y>
-     <width>91</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>FIPS</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Total</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Male</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Female</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>18+</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>65+</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>One_Race</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Two or more race</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>50</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>60</y>
-     <width>56</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Search</string>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>140</y>
-     <width>256</width>
-     <height>192</height>
-    </rect>
-   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QPushButton" name="Back">
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1" colspan="2">
+     <widget class="QComboBox" name="comboBox">
+      <item>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Total</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Male</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>18+</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>65+</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>One_Race</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Two or more race</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QComboBox" name="comboBox_2">
+      <item>
+       <property name="text">
+        <string>ALL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 10 Rows</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 100 Rows</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Display</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QComboBox" name="comboBox_3">
+      <item>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Total</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Male</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>18+</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>65+</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>One_Race</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Two or more race</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="2" colspan="2">
+     <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item row="1" column="4">
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="text">
+       <string>Search</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="4">
+     <widget class="QTableView" name="tableView"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

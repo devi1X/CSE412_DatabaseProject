@@ -1,78 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>County</class>
+ <widget class="QWidget" name="County">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>455</width>
-    <height>378</height>
+    <width>470</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QWidget" name="gridWidget" native="true">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>40</x>
      <y>30</y>
-     <width>56</width>
-     <height>17</height>
+     <width>391</width>
+     <height>291</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Back</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>30</y>
-     <width>56</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Display</string>
-   </property>
-  </widget>
-  <widget class="QTableWidget" name="tableWidget">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>170</y>
-     <width>256</width>
-     <height>192</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox">
-   <property name="geometry">
-    <rect>
-     <x>159</x>
-     <y>30</y>
-     <width>111</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>ALL</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>First 100 Row</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>First 10 Row</string>
-    </property>
-   </item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="2">
+     <widget class="QComboBox" name="box">
+      <item>
+       <property name="text">
+        <string>ALL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 10 Rows</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 100 Rows</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="Back">
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QPushButton" name="Display">
+      <property name="text">
+       <string>Display</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QTableWidget" name="table"/>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
