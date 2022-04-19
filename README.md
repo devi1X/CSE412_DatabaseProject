@@ -4,4 +4,9 @@
 
 
 Clone all files and run GUI.py
-(test)
+
+
+PyQt5
+psycopg2
+Qt Designer
+
