@@ -34,6 +34,11 @@
      <widget class="QComboBox" name="box1">
       <item>
        <property name="text">
+        <string>ALL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>FIPS</string>
        </property>
       </item>
@@ -69,7 +74,7 @@
       </item>
       <item>
        <property name="text">
-        <string>Two or more race</string>
+        <string>Two_and_more_race</string>
        </property>
       </item>
      </widget>
@@ -157,8 +162,49 @@
       </item>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QTableWidget" name="tableWidget"/>
+    <item row="2" column="0" colspan="5">
+     <widget class="QTableWidget" name="tableWidget">
+      <column>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Male</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Female</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>18+</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>65+</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>One_Race</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Two+Race</string>
+       </property>
+      </column>
+     </widget>
     </item>
    </layout>
   </widget>

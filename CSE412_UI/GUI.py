@@ -362,12 +362,297 @@ class Covid_Cases(QMainWindow):
         super(Covid_Cases, self).__init__()
         loadUi('Covid_Cases.ui', self)
         self.Back.clicked.connect(self.GoBack)
-
-
-
+        self.Display.clicked.connect(self.DisplayTable)
+        self.Search.clicked.connect(self.SearchTable)
 
     def GoBack(self):
         widget.setCurrentIndex(0)
+    def SearchTable(self):
+        conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+        cur = conn.cursor()
+
+        if self.box3.currentText() == "Date":
+
+            SearchString = self.lineEdit.text()
+            cur.execute('''SELECT * FROM Covid_Cases WHERE Date =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+        elif self.box3.currentText() == "FIPS":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Covid_Cases WHERE FIPS   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+        elif self.box3.currentText() == "Total_Cases":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Covid_Cases WHERE Total_Cases   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+
+        else:
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Covid_Cases WHERE Total_Deaths   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+    def DisplayTable(self):
+        conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+        cur = conn.cursor()
+
+        if self.box1.currentText() == "ALL":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT * FROM Covid_Cases")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT * FROM Covid_Cases LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT * FROM Covid_Cases LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    tablerow = tablerow + 1
+
+
+        elif self.box1.currentText() == "Date":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Date FROM Covid_Cases")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Date FROM Covid_Cases LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Date FROM Covid_Cases LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+        elif self.box1.currentText() == "FIPS":
+
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT FIPS FROM Covid_Cases")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT FIPS FROM Covid_Cases LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT FIPS FROM Covid_Cases LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+
+        elif self.box1.currentText() == "Total_Cases":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Total_Cases FROM Covid_Cases")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Total_Cases FROM Covid_Cases LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Total_Cases FROM Covid_Cases LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+
+        else:
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Total_Deaths FROM Covid_Cases")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[0])))
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Total_Deaths FROM Covid_Cases LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[0])))
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Total_Deaths FROM Covid_Cases LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[0])))
+                    tablerow = tablerow + 1
+        cur.close()
+        conn.close()
 
 
 class Population(QMainWindow):
@@ -375,10 +660,712 @@ class Population(QMainWindow):
         super(Population, self).__init__()
         loadUi('Population.ui', self)
         self.Back.clicked.connect(self.GoBack)
+        self.Display.clicked.connect(self.DisplayTable)
+        self.Search.clicked.connect(self.SearchTable)
 
     def GoBack(self):
         widget.setCurrentIndex(0)
+    def SearchTable(self):
+        conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+        cur = conn.cursor()
 
+        if self.box3.currentText() == "FIPS":
+
+            SearchString = self.lineEdit.text()
+            cur.execute('''SELECT * FROM Population WHERE FIPS =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+        elif self.box3.currentText() == "Total":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE Total   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+        elif self.box3.currentText() == "Male":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE Male   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+
+
+        elif self.box3.currentText() == "Female":
+
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE Female   =%s ''', (SearchString,))
+
+            tablerow = 0
+
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+
+            else:
+
+                self.tableWidget.setRowCount(len(rows))
+
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+
+                    tablerow = tablerow + 1
+
+        elif self.box3.currentText() == "18+":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE "18+"   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+
+        elif self.box3.currentText() == "65+":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE "65+"   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+        elif self.box3.currentText() == "One_Race":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE One_Race   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+        elif self.box3.currentText() == "Two_and_more_race":
+            SearchString = self.lineEdit.text()
+
+            cur.execute('''SELECT * FROM Population WHERE Two_and_more_race   =%s ''', (SearchString,))
+            tablerow = 0
+            rows = cur.fetchall()
+
+            if len(rows) == 0:
+                self.tableWidget.setRowCount(1)
+                self.tableWidget.setItem(0, 0, QtWidgets.QTableWidgetItem("Not"))
+                self.tableWidget.setItem(0, 1, QtWidgets.QTableWidgetItem("Found"))
+                self.tableWidget.setItem(0, 2, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 3, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 4, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 5, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 6, QtWidgets.QTableWidgetItem())
+                self.tableWidget.setItem(0, 7, QtWidgets.QTableWidgetItem())
+            else:
+                self.tableWidget.setRowCount(len(rows))
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+    def DisplayTable(self):
+        conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
+        cur = conn.cursor()
+        if self.box1.currentText() == "ALL":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT * FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT * FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT * FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                    tablerow = tablerow + 1
+
+
+        elif self.box1.currentText() == "FIPS":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT FIPS FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT FIPS FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT FIPS FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+        elif self.box1.currentText() == "Total":
+
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Total FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Total FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Total FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+
+        elif self.box1.currentText() == "Male":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Male FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Male FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Male FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+
+        elif self.box1.currentText() == "Female":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Female FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Female FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Female FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+        elif self.box1.currentText() == "18+":
+            if self.box2.currentText() == "ALL":
+                cur.execute('SELECT "18+" FROM Population')
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute('SELECT "18+" FROM Population LIMIT 10')
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute('SELECT "18+" FROM Population LIMIT 100')
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+        elif self.box1.currentText() == "65+":
+            if self.box2.currentText() == "ALL":
+                cur.execute('SELECT "65+" FROM Population')
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute('SELECT "65+" FROM Population LIMIT 10')
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute('SELECT "65+" FROM Population LIMIT 100')
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+        elif self.box1.currentText() == "One_Race":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT One_Race FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT One_Race FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT One_Race FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem(str(row[0])))
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem())
+                    tablerow = tablerow + 1
+        elif self.box1.currentText() == "Two_and_more_race":
+            if self.box2.currentText() == "ALL":
+                cur.execute("SELECT Two_and_more_race FROM Population")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[0])))
+                    tablerow = tablerow + 1
+            elif self.box2.currentText() == "First 10 Rows":
+                cur.execute("SELECT Two_and_more_race FROM Population LIMIT 10")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[0])))
+                    tablerow = tablerow + 1
+            else:
+                cur.execute("SELECT Two_and_more_race FROM Population LIMIT 100")
+                tablerow = 0
+                rows = cur.fetchall()
+                self.tableWidget.setRowCount(len(rows))
+                # self.table.setColumnCount(1)
+                for row in rows:
+                    self.tableWidget.setItem(tablerow, 0, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 1, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 2, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 3, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 4, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 5, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 6, QtWidgets.QTableWidgetItem())
+                    self.tableWidget.setItem(tablerow, 7, QtWidgets.QTableWidgetItem(str(row[0])))
+                    tablerow = tablerow + 1
+        cur.close()
+        conn.close()
 
 class County(QMainWindow):
     def __init__(self):
@@ -386,7 +1373,7 @@ class County(QMainWindow):
         loadUi('County.ui', self)
         self.Back.clicked.connect(self.GoBack)
         self.Display.clicked.connect(self.DisplayTable)
-        self.tableWidget.setColumnWidth(0, 150)
+
 
     def GoBack(self):
         widget.setCurrentIndex(0)
@@ -440,7 +1427,8 @@ widget.addWidget(Population())
 widget.addWidget(County())
 
 widget.setWindowTitle("COVID-19 DATA HELPER")
-
+widget.setFixedHeight(980)
+widget.setFixedWidth(1060)
 widget.show()
 
 try:
