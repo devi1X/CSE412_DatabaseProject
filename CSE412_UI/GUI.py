@@ -34,6 +34,8 @@ class MainWindow(QMainWindow):
         self.Population.clicked.connect(self.PolulationPage)
         self.Covid_Cases.clicked.connect(self.CasePage)
 
+
+
     def AreaPage(self):
         widget.setCurrentIndex(1)
 
@@ -54,11 +56,28 @@ class Area(QMainWindow):
     def __init__(self):
         super(Area, self).__init__()
         loadUi('Area.ui', self)
-        self.Back.clicked.connect(self.GoBack)
+        self.MainPage.clicked.connect(self.GoMainPage)
         self.Display.clicked.connect(self.DisplayTable)
         self.Search.clicked.connect(self.SearchTable)
+        self.State.clicked.connect(self.StatePage)
+        self.County.clicked.connect(self.CountyPage)
+        self.Population.clicked.connect(self.PolulationPage)
+        self.Covid_Cases.clicked.connect(self.CasePage)
 
-    def GoBack(self):
+
+
+    def StatePage(self):
+        widget.setCurrentIndex(2)
+
+    def CasePage(self):
+        widget.setCurrentIndex(3)
+
+    def PolulationPage(self):
+        widget.setCurrentIndex(4)
+
+    def CountyPage(self):
+        widget.setCurrentIndex(5)
+    def GoMainPage(self):
         widget.setCurrentIndex(0)
 
     def SearchTable(self):
@@ -208,11 +227,26 @@ class State(QMainWindow):
     def __init__(self):
         super(State, self).__init__()
         loadUi('State.ui', self)
-        self.Back.clicked.connect(self.GoBack)
+        self.MainPage.clicked.connect(self.GoMainPage)
         self.Display.clicked.connect(self.DisplayTable)
         self.Search.clicked.connect(self.SearchTable)
+        self.Area.clicked.connect(self.AreaPage)
+        self.County.clicked.connect(self.CountyPage)
+        self.Population.clicked.connect(self.PolulationPage)
+        self.Covid_Cases.clicked.connect(self.CasePage)
 
-    def GoBack(self):
+    def AreaPage(self):
+        widget.setCurrentIndex(1)
+
+    def CasePage(self):
+        widget.setCurrentIndex(3)
+
+    def PolulationPage(self):
+        widget.setCurrentIndex(4)
+
+    def CountyPage(self):
+        widget.setCurrentIndex(5)
+    def GoMainPage(self):
         widget.setCurrentIndex(0)
     def SearchTable(self):
         conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
@@ -361,11 +395,27 @@ class Covid_Cases(QMainWindow):
     def __init__(self):
         super(Covid_Cases, self).__init__()
         loadUi('Covid_Cases.ui', self)
-        self.Back.clicked.connect(self.GoBack)
+        self.MainPage.clicked.connect(self.GoMainPage)
         self.Display.clicked.connect(self.DisplayTable)
         self.Search.clicked.connect(self.SearchTable)
+        self.Area.clicked.connect(self.AreaPage)
+        self.State.clicked.connect(self.StatePage)
+        self.County.clicked.connect(self.CountyPage)
+        self.Population.clicked.connect(self.PolulationPage)
 
-    def GoBack(self):
+    def AreaPage(self):
+        widget.setCurrentIndex(1)
+
+    def StatePage(self):
+        widget.setCurrentIndex(2)
+
+    def PolulationPage(self):
+        widget.setCurrentIndex(4)
+
+    def CountyPage(self):
+        widget.setCurrentIndex(5)
+
+    def GoMainPage(self):
         widget.setCurrentIndex(0)
     def SearchTable(self):
         conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
@@ -659,11 +709,28 @@ class Population(QMainWindow):
     def __init__(self):
         super(Population, self).__init__()
         loadUi('Population.ui', self)
-        self.Back.clicked.connect(self.GoBack)
+        self.MainPage.clicked.connect(self.GoMainPage)
         self.Display.clicked.connect(self.DisplayTable)
         self.Search.clicked.connect(self.SearchTable)
+        self.Area.clicked.connect(self.AreaPage)
+        self.State.clicked.connect(self.StatePage)
+        self.County.clicked.connect(self.CountyPage)
+        self.Covid_Cases.clicked.connect(self.CasePage)
 
-    def GoBack(self):
+    def AreaPage(self):
+        widget.setCurrentIndex(1)
+
+    def StatePage(self):
+        widget.setCurrentIndex(2)
+
+    def CasePage(self):
+        widget.setCurrentIndex(3)
+
+    def CountyPage(self):
+        widget.setCurrentIndex(5)
+
+
+    def GoMainPage(self):
         widget.setCurrentIndex(0)
     def SearchTable(self):
         conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")
@@ -1371,11 +1438,26 @@ class County(QMainWindow):
     def __init__(self):
         super(County, self).__init__()
         loadUi('County.ui', self)
-        self.Back.clicked.connect(self.GoBack)
+        self.MainPage.clicked.connect(self.GoMainPage)
         self.Display.clicked.connect(self.DisplayTable)
+        self.Area.clicked.connect(self.AreaPage)
+        self.State.clicked.connect(self.StatePage)
+        self.Population.clicked.connect(self.PolulationPage)
+        self.Covid_Cases.clicked.connect(self.CasePage)
 
+    def AreaPage(self):
+        widget.setCurrentIndex(1)
 
-    def GoBack(self):
+    def StatePage(self):
+        widget.setCurrentIndex(2)
+
+    def CasePage(self):
+        widget.setCurrentIndex(3)
+
+    def PolulationPage(self):
+        widget.setCurrentIndex(4)
+
+    def GoMainPage(self):
         widget.setCurrentIndex(0)
 
     def DisplayTable(self):

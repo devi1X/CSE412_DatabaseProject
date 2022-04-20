@@ -6,31 +6,132 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>621</width>
-    <height>460</height>
+    <width>744</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>471</width>
-     <height>261</height>
+     <x>6</x>
+     <y>53</y>
+     <width>701</width>
+     <height>459</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="4">
+    <item row="5" column="0" colspan="3">
+     <widget class="QTableWidget" name="tableWidget">
+      <column>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total_Cases</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total_Deaths</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QComboBox" name="box3">
+      <item>
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Total_Cases</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Total_Deaths</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2">
+     <widget class="QPushButton" name="Insert">
+      <property name="text">
+       <string>Insert</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="3">
+     <widget class="QTextBrowser" name="textBrowser"/>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLineEdit" name="lineEdit2"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="box2">
+      <item>
+       <property name="text">
+        <string>All</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 100 Rows</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 10 Rows</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="2">
      <widget class="QPushButton" name="Display">
       <property name="text">
        <string>Display</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1" colspan="2">
+    <item row="4" column="0">
+     <widget class="QPushButton" name="Delete">
+      <property name="text">
+       <string>Delete</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QPushButton" name="Search">
+      <property name="text">
+       <string>Search</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
      <widget class="QComboBox" name="box1">
       <item>
        <property name="text">
@@ -59,93 +160,57 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="4">
-     <widget class="QPushButton" name="Search">
-      <property name="text">
-       <string>Search</string>
+    <item row="0" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QPushButton" name="MainPage">
+        <property name="text">
+         <string>MainPage</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Population">
+        <property name="text">
+         <string>Population</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Area">
+        <property name="text">
+         <string>Area</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="County">
+        <property name="text">
+         <string>County</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="State">
+        <property name="text">
+         <string>State</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-     </widget>
-    </item>
-    <item row="1" column="2" colspan="2">
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="text">
-       <string/>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QComboBox" name="box2">
-      <item>
-       <property name="text">
-        <string>ALL</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>First 10 Rows</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>First 100 Rows</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QComboBox" name="box3">
-      <item>
-       <property name="text">
-        <string>Date</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>FIPS</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Total_Cases</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Total_Deaths</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="Back">
-      <property name="text">
-       <string>Back</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1" colspan="4">
-     <widget class="QTableWidget" name="tableWidget">
-      <column>
-       <property name="text">
-        <string>Date</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>FIPS</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Total_Cases</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Total_Deaths</string>
-       </property>
-      </column>
-     </widget>
+     </spacer>
     </item>
    </layout>
   </widget>
