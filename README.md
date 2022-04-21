@@ -9,7 +9,7 @@ pip install PyQt5
 python3 GUI.py
 python GUI.py
 
-tool used:
+tools used:
 PyQt5
 psycopg2
 Qt Designer
