@@ -1,13 +1,9 @@
 import sys
-from PyQt5.QtCore import QDate
 from PyQt5.uic import loadUi
-from PyQt5.QtGui import *
 import psycopg2
-from PyQt5 import QtWidgets, QtWebEngineWidgets, QtCore
-from PyQt5.QtWidgets import QApplication, QDialog, QLineEdit, QMainWindow, QTableWidget, QTableWidgetItem
-from pandas import DataFrame
-from urllib.request import urlopen
-import plotly.express as px
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QMainWindow
+
 
 
 # conn = psycopg2.connect(database="CSE412", user="postgres", password="838985850")

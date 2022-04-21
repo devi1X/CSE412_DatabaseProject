@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>6</x>
@@ -23,7 +23,46 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="5" column="0" colspan="3">
+    <item row="0" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QPushButton" name="MainPage">
+        <property name="text">
+         <string>MainPage</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Area">
+        <property name="text">
+         <string>Area</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="County">
+        <property name="text">
+         <string>County</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="Covid_Cases">
+        <property name="text">
+         <string>Covid_Cases</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="State">
+        <property name="text">
+         <string>State</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="4" column="0" colspan="3">
      <widget class="QTableWidget" name="tableWidget">
       <column>
        <property name="text">
@@ -67,44 +106,72 @@
       </column>
      </widget>
     </item>
-    <item row="0" column="0" colspan="3">
-     <layout class="QHBoxLayout" name="horizontalLayout_7">
+    <item row="2" column="2">
+     <widget class="QPushButton" name="Display">
+      <property name="mouseTracking">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string>Display</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QPushButton" name="Search">
+      <property name="text">
+       <string>Search</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="3">
+     <widget class="QTextBrowser" name="textBrowser"/>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QComboBox" name="box3">
       <item>
-       <widget class="QPushButton" name="MainPage">
-        <property name="text">
-         <string>MainPage</string>
-        </property>
-       </widget>
+       <property name="text">
+        <string>FIPS</string>
+       </property>
       </item>
       <item>
-       <widget class="QPushButton" name="Area">
-        <property name="text">
-         <string>Area</string>
-        </property>
-       </widget>
+       <property name="text">
+        <string>Total</string>
+       </property>
       </item>
       <item>
-       <widget class="QPushButton" name="County">
-        <property name="text">
-         <string>County</string>
-        </property>
-       </widget>
+       <property name="text">
+        <string>Male</string>
+       </property>
       </item>
       <item>
-       <widget class="QPushButton" name="Covid_Cases">
-        <property name="text">
-         <string>Covid_Cases</string>
-        </property>
-       </widget>
+       <property name="text">
+        <string>Female</string>
+       </property>
       </item>
       <item>
-       <widget class="QPushButton" name="State">
-        <property name="text">
-         <string>State</string>
-        </property>
-       </widget>
+       <property name="text">
+        <string>18+</string>
+       </property>
       </item>
-     </layout>
+      <item>
+       <property name="text">
+        <string>65+</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>One_Race</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Two or more race</string>
+       </property>
+      </item>
+     </widget>
     </item>
     <item row="2" column="0">
      <widget class="QComboBox" name="box1">
@@ -170,90 +237,6 @@
       <item>
        <property name="text">
         <string>First 100 Rows</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QPushButton" name="Display">
-      <property name="mouseTracking">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string>Display</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="2">
-     <widget class="QPushButton" name="Insert">
-      <property name="text">
-       <string>Insert</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="3">
-     <widget class="QTextBrowser" name="textBrowser"/>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit2"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="Delete">
-      <property name="text">
-       <string>Delete</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QPushButton" name="Search">
-      <property name="text">
-       <string>Search</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QComboBox" name="box3">
-      <item>
-       <property name="text">
-        <string>FIPS</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Total</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Male</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Female</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>18+</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>65+</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>One_Race</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Two or more race</string>
        </property>
       </item>
      </widget>

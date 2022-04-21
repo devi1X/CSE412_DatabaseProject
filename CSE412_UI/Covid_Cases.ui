@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>6</x>
@@ -23,7 +23,36 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="1">
+     <widget class="QComboBox" name="box2">
+      <item>
+       <property name="text">
+        <string>All</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 100 Rows</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>First 10 Rows</string>
+       </property>
+      </item>
+     </widget>
+    </item>
     <item row="5" column="0" colspan="3">
+     <widget class="QTextBrowser" name="textBrowser"/>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="3">
      <widget class="QTableWidget" name="tableWidget">
       <column>
        <property name="text">
@@ -71,45 +100,6 @@
       </item>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEdit">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="2">
-     <widget class="QPushButton" name="Insert">
-      <property name="text">
-       <string>Insert</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0" colspan="3">
-     <widget class="QTextBrowser" name="textBrowser"/>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEdit2"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="box2">
-      <item>
-       <property name="text">
-        <string>All</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>First 100 Rows</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>First 10 Rows</string>
-       </property>
-      </item>
-     </widget>
-    </item>
     <item row="2" column="2">
      <widget class="QPushButton" name="Display">
       <property name="text">
@@ -117,19 +107,18 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="Delete">
-      <property name="text">
-       <string>Delete</string>
+    <item row="1" column="0" colspan="3">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QPushButton" name="Search">
-      <property name="text">
-       <string>Search</string>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
       </property>
-     </widget>
+     </spacer>
     </item>
     <item row="2" column="0">
      <widget class="QComboBox" name="box1">
@@ -158,6 +147,13 @@
         <string>Total_Deaths</string>
        </property>
       </item>
+     </widget>
+    </item>
+    <item row="3" column="2">
+     <widget class="QPushButton" name="Search">
+      <property name="text">
+       <string>Search</string>
+      </property>
      </widget>
     </item>
     <item row="0" column="0" colspan="3">
@@ -198,19 +194,6 @@
        </widget>
       </item>
      </layout>
-    </item>
-    <item row="1" column="0" colspan="3">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>
