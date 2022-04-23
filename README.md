@@ -7,7 +7,7 @@ Qt Designer
 Python 3.8.0    
 PostgreSQL (14.1)  
 PyCharm CE  
-Git/GitHub
+Git/GitHub  
 
 ## How to use this application:
 ### 1. Clone the repository of this application by using the code below.
@@ -33,6 +33,10 @@ https://docs.google.com/document/d/1po43tCQl34IgnkJckKIhjp5URosIXvR74iuM_b13B_k/
 
 ### Notes: The best way to run this application is using PyCharm CE, if you use terminal, some errors may happen.
 ### Some errors will happen if you try to install PyQt5 and psycopg2 on ARM Mac
+
+### Youtube Link for demonstration:  
+### https://youtu.be/ix3K2o4oMGY 
+
 
 
 
