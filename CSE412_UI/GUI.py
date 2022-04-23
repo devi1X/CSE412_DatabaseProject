@@ -1505,8 +1505,8 @@ widget.addWidget(Population())
 widget.addWidget(County())
 
 widget.setWindowTitle("COVID-19 DATA HELPER")
-widget.setFixedHeight(980)
-widget.setFixedWidth(1060)
+widget.setFixedHeight(1080)
+widget.setFixedWidth(1800)
 widget.show()
 
 try:
