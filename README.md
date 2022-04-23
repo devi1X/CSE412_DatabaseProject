@@ -31,8 +31,8 @@ https://docs.google.com/document/d/1po43tCQl34IgnkJckKIhjp5URosIXvR74iuM_b13B_k/
 
 ### 6: Run GUI.py using PyCharm CE
 
-### Notes: The best way to run this application is using PyCharm CE, if you use terminal, some error may happen.
-### Some error will happen if you try to install PyQt5 and psycopg2 on ARM Mac
+### Notes: The best way to run this application is using PyCharm CE, if you use terminal, some errors may happen.
+### Some errors will happen if you try to install PyQt5 and psycopg2 on ARM Mac
 
 
 
