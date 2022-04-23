@@ -3,9 +3,13 @@
 
 
 
-Clone all files and run GUI.py
+git clone https://github.com/devi1X/CSE412_DatabaseProject
+pip install PyQt5
+//配置数据库
+python3 GUI.py
+python GUI.py
 
-
+tools used:
 PyQt5
 psycopg2
 Qt Designer
